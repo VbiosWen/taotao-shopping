@@ -38,14 +38,14 @@ public class PictureServiceImpl implements PictureService {
     private String imageBaseUrl;
 
     @Override
-    public Map upload(MultipartFile uploadFile) {
-        HashMap<Object, Object> map = new HashMap<>();
+    public PictureResult upload(MultipartFile uploadFile) {
+
 
         /**
          * 判断图片是否为空 为空直接返回错误信息
          */
         if (uploadFile == null || uploadFile.isEmpty()) {
-            map.put("error", 1);
+            return PictureResult.error("图片不能为空");
         }
         //获取图片名称
         String originalFilename = uploadFile.getOriginalFilename();
@@ -64,10 +64,10 @@ public class PictureServiceImpl implements PictureService {
         } catch (Exception e) {
             e.printStackTrace();
             //上传失败 返回失败信息
-            map.put("error", 1);
+            return PictureResult.error(ExceptionUtils.getStackTrace(e));
         }
-        map.put("error", 0);
-        map.put("url", imageBaseUrl + filePath + "/" + imageName);
-        return map;
+
+        return PictureResult.ok(imageBaseUrl + filePath + "/" + imageName);
+
     }
 }

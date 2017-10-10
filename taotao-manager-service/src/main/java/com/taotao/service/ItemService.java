@@ -14,4 +14,6 @@ public interface ItemService {
     TbItem getItemById(long id);
 
     EUDataGridResult getItemList(int page, int rows);
+
+    void savaItem(TbItem item, String desc, String itemParams) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
 import com.taotao.common.pojo.PictureResult;
+import com.taotao.common.util.JsonUtils;
 import com.taotao.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,16 +18,18 @@ import java.util.Map;
  * @Modified By:
  */
 @Controller
+@RequestMapping("/pic")
 public class PictureController {
 
 
     @Autowired
     private PictureService pictureService;
 
-    @RequestMapping("/pic/upload")
+    @RequestMapping("/upload")
     @ResponseBody
-    public Map upload(MultipartFile uploadFile) {
-        Map result = pictureService.upload(uploadFile);
+    public PictureResult upload(MultipartFile uploadFile) {
+        PictureResult result = pictureService.upload(uploadFile);
+
         return result;
     }
 

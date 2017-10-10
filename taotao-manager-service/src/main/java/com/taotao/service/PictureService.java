@@ -13,5 +13,5 @@ import java.util.Map;
  */
 public interface PictureService {
 
-    public Map upload(MultipartFile uploadFile);
+    public PictureResult upload(MultipartFile uploadFile);
 }
