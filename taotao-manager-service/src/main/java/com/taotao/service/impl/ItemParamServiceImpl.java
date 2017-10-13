@@ -3,14 +3,17 @@ package com.taotao.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EUDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.mapper.TbItemParamMapper;
 import com.taotao.pojo.TbItemParam;
 import com.taotao.pojo.TbItemParamExample;
-import com.taotao.service.ParamService;
+import com.taotao.pojo.TbItemParamItem;
+import com.taotao.service.ItemParamService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +23,7 @@ import java.util.List;
  * @Modified By:
  */
 @Service
-public class ParamServiceImpl implements ParamService {
+public class ItemParamServiceImpl implements ItemParamService {
 
     @Resource
     private TbItemParamMapper itemParamMapper;
@@ -41,4 +44,34 @@ public class ParamServiceImpl implements ParamService {
         result.setTotal((int) pageInfo.getTotal());
         return result;
     }
+
+    /**
+     * 查询当前分类中是否有规格参数
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public TaotaoResult getParamByItemCatId(Long id) {
+        TbItemParamExample example = new TbItemParamExample();
+        TbItemParamExample.Criteria criteria = example.createCriteria();
+        criteria.andItemCatIdEqualTo(id);
+        List<TbItemParam> tbItemParams = itemParamMapper.selectByExampleWithBLOBs(example);
+        if (tbItemParams != null && tbItemParams.size() > 0) {
+            return TaotaoResult.ok(tbItemParams.get(0));
+        }
+
+        return TaotaoResult.ok();
+    }
+
+    @Override
+    public TaotaoResult insertItemParam(TbItemParam itemParam) {
+
+        itemParam.setCreated(new Date());
+        itemParam.setUpdated(new Date());
+        itemParamMapper.insert(itemParam);
+        return TaotaoResult.ok();
+    }
+
+
 }

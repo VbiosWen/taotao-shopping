@@ -39,6 +39,10 @@ public class TaotaoResult {
         return new TaotaoResult(null);
     }
 
+    public static TaotaoResult ok(Object data) {
+        return new TaotaoResult(data);
+    }
+
     public TaotaoResult(Object data) {
         this.status = 200;
         this.msg = "OK";
