@@ -13,6 +13,8 @@
         <module name="taotao-manager-web" />
         <module name="taotao-mapper" />
         <module name="taotao-pojo" />
+        <module name="taotao-portal" />
+        <module name="taotao-rest" />
         <module name="taotao-service" />
         <module name="taotaomapper" />
       </profile>
@@ -27,6 +29,8 @@
       <module name="taotao-mapper" target="1.7" />
       <module name="taotao-parent" target="1.7" />
       <module name="taotao-pojo" target="1.7" />
+      <module name="taotao-portal" target="1.7" />
+      <module name="taotao-rest" target="1.7" />
       <module name="taotao-service" target="1.7" />
       <module name="taotaomapper" target="1.7" />
     </bytecodeTargetLevel>
